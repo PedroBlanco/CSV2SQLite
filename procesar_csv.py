@@ -19,17 +19,19 @@ args = parser.parse_args()
 conn = sqlite3.connect(args.db_nombre)
 cursor = conn.cursor()
 
-# Crea la tabla en la base de datos
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS mi_tabla (
-        id INTEGER PRIMARY KEY,
-        {}
-    )
-'''.format(', '.join(['columna{} TEXT'.format(i) for i in range(1, 61)])))
-
 # Abre el archivo CSV
-with open(args.archivo_csv, 'r') as csvfile:
-    reader = csv.reader(csvfile)
+with open(args.archivo_csv, 'r', buffering=1024*1024,encoding='utf-8') as csvfile:
+    num_columns = 63
+
+    # Crea la tabla en la base de datos
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS mi_tabla (
+            id INTEGER PRIMARY KEY,
+            {}
+        )
+    '''.format(', '.join(['columna{} TEXT'.format(i) for i in range(1, num_columns + 1)])))
+    
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"',doublequote=True)
     next(reader)  # Salta la primera fila (encabezados)
 
     # Procesa el archivo CSV por partes
@@ -38,12 +40,12 @@ with open(args.archivo_csv, 'r') as csvfile:
         chunk.append(fila)
         if len(chunk) >= args.chunksize:
             # Inserta los datos en la base de datos
-            cursor.executemany('INSERT INTO mi_tabla VALUES (NULL, {})'.format(', '.join(['?'] * 60)), chunk)
+            cursor.executemany('INSERT INTO mi_tabla VALUES (NULL, {})'.format(', '.join(['?'] * num_columns)), chunk)
             chunk = []
 
     # Inserta los datos restantes en la base de datos
     if chunk:
-        cursor.executemany('INSERT INTO mi_tabla VALUES (NULL, {})'.format(', '.join(['?'] * 60)), chunk)
+        cursor.executemany('INSERT INTO mi_tabla VALUES (NULL, {})'.format(', '.join(['?'] * num_columns)), chunk)
 
 # Cierra la conexión a la base de datos
 conn.commit()
