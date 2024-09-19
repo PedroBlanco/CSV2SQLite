@@ -159,5 +159,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# No vamos a incluir los archivos CSV en el repositorio al ser archivos MUY grandes
+# No vamos a incluir los archivos CSV ni DB (SQLite) en el repositorio al ser archivos MUY grandes
 *.csv
+*.db
