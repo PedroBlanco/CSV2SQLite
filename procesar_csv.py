@@ -16,7 +16,7 @@ parser.add_argument('archivo_csv', help='Nombre del archivo CSV a procesar')
 parser.add_argument('-h', '--help', action='help', help='Muestra esta ayuda y sale')
 parser.add_argument('--db_name', help='Nombre del archivo de base de datos SQLite a generar (por defecto, se genera a partir del nombre del archivo CSV)')
 parser.add_argument('-f', '--force', action='store_true', help='Reescribe el archivo de base de datos si ya existe')
-parser.add_argument('-c','--chunksize', default=50, type=int, help='Número de filas a procesar por parte, en caso de archivos grandes (50 por defecto)')
+parser.add_argument('-c','--chunksize', default=50, type=int, help='Número de filas a procesar por parte, recomendable en caso de archivos grandes (50 por defecto)')
 parser.add_argument('-p','--progress', action='store_true', help='Muestra el progreso de la inserción de filas')
 parser.add_argument('-v','--verbose',  action='store_true', help='Muestra información de todo el proceso')
 
