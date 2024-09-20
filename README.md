@@ -52,4 +52,4 @@ Esto procesará el archivo `datos.csv` y generará un nuevo archivo llamado `dat
 
 - Asegúrese de que el archivo CSV esté en el mismo directorio que el script, o especifique la ruta completa al archivo.
 - Se creará un nuevo archivo de base de datos, eliminando el archivo existente si se especifica la opción `--force`.
- 
+- En la base de datos, se creará una única tabla con una primera columna `id` que será la clave primaria de la tabla y a continuación una columna por cada columna del archivo CSV; su tipo de dato será `TEXT` y su nombre de columna será el mismo de la columna del archivo CSV (incluyendo espacios). 
