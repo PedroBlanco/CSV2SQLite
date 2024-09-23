@@ -1,6 +1,6 @@
 # CSV2SQLite
 
-Script para procesar un archivo CSV de gran tamaño en una base de datos SQLite.
+Script para convertir un archivo CSV (de gran tamaño) en una base de datos SQLite.
 
 ## Introducción
 
