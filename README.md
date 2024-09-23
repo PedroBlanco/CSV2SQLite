@@ -1,10 +1,14 @@
-# ProcesarCSV_Falcon: `procesar_csv.py`
+# CSV2SQLite
 
 Script para procesar un archivo CSV de gran tamaño en una base de datos SQLite.
 
 ## Introducción
 
-El script `procesar_csv.py` es una herramienta diseñada para procesar un archivo CSV y convertirlo en una base de datos SQLite. A continuación, se explica cómo utilizar este script de manera efectiva.
+El script `procesar_csv.py` es una herramienta diseñada para procesar un archivo CSV y convertirlo en una base de datos SQLite.
+
+Supongamos que tenemos un archivo CSV con muchas columnas y muchas filas (y con celdas muy grandes). Por su tamaño, al  intentar abrir el archivo con LibreOffice Calc o Excel, nos quedamos sin memoria o se paraliza el sistema. Este script nos permite procesar este archivo CSV y convertirlo en datos que se insertarán en una base de datos en formato SQLite, que podremos usar para interactuar con los datos más fácilmente que con LibreOffice Calc o Excel. 
+
+A continuación, se explica cómo utilizar este script de manera efectiva.
 
 ## Requisitos Previos
 
@@ -42,11 +46,19 @@ options:
 ```
 ## Ejemplo de Uso
 
-Supongamos que tenemos un archivo CSV llamado `datos.csv` que contiene información sobre clientes, y deseamos procesar esta información para obtener una base de datos en formato SQLite. Podemos ejecutar el script de la siguiente manera:
+Podemos ejecutar el script de la siguiente manera:
 ```bash
 python procesar_csv.py --db_name datos_en_sqlite.db datos.csv
 ```
 Esto procesará el archivo `datos.csv` y generará un nuevo archivo llamado `datos_en_sqlite.db` que se puede usar para interactuar con la base de datos.
+
+### Limitar número de líneas
+
+Para limitar el número de filas que se procesan por parte, puedes utilizar el parámetro `--chunksize`, en este caso con un valor de 10:
+
+```bash
+python procesar_csv.py --db_name datos_en_sqlite.db --chunksize 10 datos.csv
+```
 
 ## Notas Adicionales
 
