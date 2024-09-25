@@ -52,7 +52,7 @@ if os.path.exists(db_file):
         sys.exit(1)
 
 # Conecta a la base de datos SQLite
-conn = sqlite3.connect(args.db_name)
+conn = sqlite3.connect(db_file)
 cursor = conn.cursor()
 
 # Abre el archivo CSV
